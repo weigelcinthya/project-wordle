@@ -12,11 +12,18 @@ console.info({ answer });
 function Game() {
 
   const [guesses, setGuesses] = React.useState([]);
+  const [ win, setWin ] = React.useState(false);
+
+
+  const submitGuess = (tentativeGuess) => {
+    setGuesses([...guesses, tentativeGuess]);
+    setWin(tentativeGuess === answer);
+  }
 
   return (
     <>
-      <Guesses guesses={guesses} answer={answer}/>
-      <GuessInput setGuesses={setGuesses} currentGuesses={guesses}/>
+      <Guesses guesses={guesses} answer={answer} win={win}/>
+      <GuessInput setGuesses={setGuesses} currentGuesses={guesses} handleSubmit={submitGuess}/>
     </>
   );
 }
